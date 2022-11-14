@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.report.dao.ConditionMapper">
+  <resultMap id="BaseResultMap" type="com.example.report.model.Condition">
+    <id column="ID" jdbcType="NUMERIC" property="id" />
+    <result column="KINDID" jdbcType="NUMERIC" property="kindid" />
+    <result column="CAPTION" jdbcType="VARCHAR" property="caption" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="COMMAND" jdbcType="VARCHAR" property="command" />
+    <result column="INITVALUE" jdbcType="VARCHAR" property="initvalue" />
+    <result column="ISVAILD" jdbcType="VARCHAR" property="isvaild" />
+    <result column="ISHIDDEN" jdbcType="VARCHAR" property="ishidden" />
+    <result column="OID" jdbcType="NUMERIC" property="oid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, KINDID, CAPTION, CODE, TYPE, COMMAND, INITVALUE, ISVAILD, ISHIDDEN, OID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ANALYZE_CONDITION
+    where ID = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from SYS_ANALYZE_CONDITION
+    where ID = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.example.report.model.Condition">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      select S_SYS_ANALYZE_CONDITION.NEXTVAL from dual
+    </selectKey>
+    insert into SYS_ANALYZE_CONDITION (ID, KINDID, CAPTION, 
+      CODE, TYPE, COMMAND, 
+      INITVALUE, ISVAILD, ISHIDDEN, 
+      OID)
+    values (#{id,jdbcType=NUMERIC}, #{kindid,jdbcType=NUMERIC}, #{caption,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{command,jdbcType=VARCHAR}, 
+      #{initvalue,jdbcType=VARCHAR}, #{isvaild,jdbcType=VARCHAR}, #{ishidden,jdbcType=VARCHAR}, 
+      #{oid,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.report.model.Condition">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      select S_SYS_ANALYZE_CONDITION.NEXTVAL from dual
+    </selectKey>
+    insert into SYS_ANALYZE_CONDITION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      ID,
+      <if test="kindid != null">
+        KINDID,
+      </if>
+      <if test="caption != null">
+        CAPTION,
+      </if>
+      <if test="code != null">
+        CODE,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="command != null">
+        COMMAND,
+      </if>
+      <if test="initvalue != null">
+        INITVALUE,
+      </if>
+      <if test="isvaild != null">
+        ISVAILD,
+      </if>
+      <if test="ishidden != null">
+        ISHIDDEN,
+      </if>
+      <if test="oid != null">
+        OID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=NUMERIC},
+      <if test="kindid != null">
+        #{kindid,jdbcType=NUMERIC},
+      </if>
+      <if test="caption != null">
+        #{caption,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="command != null">
+        #{command,jdbcType=VARCHAR},
+      </if>
+      <if test="initvalue != null">
+        #{initvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="isvaild != null">
+        #{isvaild,jdbcType=VARCHAR},
+      </if>
+      <if test="ishidden != null">
+        #{ishidden,jdbcType=VARCHAR},
+      </if>
+      <if test="oid != null">
+        #{oid,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.report.model.Condition">
+    update SYS_ANALYZE_CONDITION
+    <set>
+      <if test="kindid != null">
+        KINDID = #{kindid,jdbcType=NUMERIC},
+      </if>
+      <if test="caption != null">
+        CAPTION = #{caption,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="command != null">
+        COMMAND = #{command,jdbcType=VARCHAR},
+      </if>
+      <if test="initvalue != null">
+        INITVALUE = #{initvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="isvaild != null">
+        ISVAILD = #{isvaild,jdbcType=VARCHAR},
+      </if>
+      <if test="ishidden != null">
+        ISHIDDEN = #{ishidden,jdbcType=VARCHAR},
+      </if>
+      <if test="oid != null">
+        OID = #{oid,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.report.model.Condition">
+    update SYS_ANALYZE_CONDITION
+    set KINDID = #{kindid,jdbcType=NUMERIC},
+      CAPTION = #{caption,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      COMMAND = #{command,jdbcType=VARCHAR},
+      INITVALUE = #{initvalue,jdbcType=VARCHAR},
+      ISVAILD = #{isvaild,jdbcType=VARCHAR},
+      ISHIDDEN = #{ishidden,jdbcType=VARCHAR},
+      OID = #{oid,jdbcType=NUMERIC}
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+</mapper>

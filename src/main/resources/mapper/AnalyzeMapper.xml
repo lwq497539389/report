@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.report.dao.AnalyzeMapper">
+  <resultMap id="BaseResultMap" type="com.example.report.model.Analyze">
+    <id column="ID" jdbcType="NUMERIC" property="id" />
+    <result column="KINDID" jdbcType="NUMERIC" property="kindid" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="CHARTTYPE" jdbcType="VARCHAR" property="charttype" />
+    <result column="CHARTUNIT" jdbcType="VARCHAR" property="chartunit" />
+    <result column="CHARTSERIES" jdbcType="VARCHAR" property="chartseries" />
+    <result column="CHARTCOLUMN" jdbcType="VARCHAR" property="chartcolumn" />
+    <result column="PATH" jdbcType="VARCHAR" property="path" />
+    <result column="COMMANDTYPE" jdbcType="VARCHAR" property="commandtype" />
+    <result column="COMMAND" jdbcType="VARCHAR" property="command" />
+    <result column="HEADER" jdbcType="VARCHAR" property="header" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="CHARTSORT" jdbcType="VARCHAR" property="chartsort" />
+    <result column="CHARTMINLIMIT" jdbcType="NUMERIC" property="chartminlimit" />
+    <result column="CHARTMAXLIMIT" jdbcType="NUMERIC" property="chartmaxlimit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, KINDID, TITLE, TYPE, CHARTTYPE, CHARTUNIT, CHARTSERIES, CHARTCOLUMN, PATH, COMMANDTYPE, 
+    COMMAND, HEADER, MEMO, CHARTSORT, CHARTMINLIMIT, CHARTMAXLIMIT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ANALYZE_INFO
+    where ID = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from SYS_ANALYZE_INFO
+    where ID = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.example.report.model.Analyze">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      select S_SYS_ANALYZE_CONDITION.NEXTVAL from dual
+    </selectKey>
+    insert into SYS_ANALYZE_INFO (ID, KINDID, TITLE, 
+      TYPE, CHARTTYPE, CHARTUNIT, 
+      CHARTSERIES, CHARTCOLUMN, PATH, 
+      COMMANDTYPE, COMMAND, HEADER, 
+      MEMO, CHARTSORT, CHARTMINLIMIT, 
+      CHARTMAXLIMIT)
+    values (#{id,jdbcType=NUMERIC}, #{kindid,jdbcType=NUMERIC}, #{title,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{charttype,jdbcType=VARCHAR}, #{chartunit,jdbcType=VARCHAR}, 
+      #{chartseries,jdbcType=VARCHAR}, #{chartcolumn,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{commandtype,jdbcType=VARCHAR}, #{command,jdbcType=VARCHAR}, #{header,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{chartsort,jdbcType=VARCHAR}, #{chartminlimit,jdbcType=NUMERIC}, 
+      #{chartmaxlimit,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.report.model.Analyze">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      select S_SYS_ANALYZE_CONDITION.NEXTVAL from dual
+    </selectKey>
+    insert into SYS_ANALYZE_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      ID,
+      <if test="kindid != null">
+        KINDID,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="charttype != null">
+        CHARTTYPE,
+      </if>
+      <if test="chartunit != null">
+        CHARTUNIT,
+      </if>
+      <if test="chartseries != null">
+        CHARTSERIES,
+      </if>
+      <if test="chartcolumn != null">
+        CHARTCOLUMN,
+      </if>
+      <if test="path != null">
+        PATH,
+      </if>
+      <if test="commandtype != null">
+        COMMANDTYPE,
+      </if>
+      <if test="command != null">
+        COMMAND,
+      </if>
+      <if test="header != null">
+        HEADER,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="chartsort != null">
+        CHARTSORT,
+      </if>
+      <if test="chartminlimit != null">
+        CHARTMINLIMIT,
+      </if>
+      <if test="chartmaxlimit != null">
+        CHARTMAXLIMIT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=NUMERIC},
+      <if test="kindid != null">
+        #{kindid,jdbcType=NUMERIC},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="charttype != null">
+        #{charttype,jdbcType=VARCHAR},
+      </if>
+      <if test="chartunit != null">
+        #{chartunit,jdbcType=VARCHAR},
+      </if>
+      <if test="chartseries != null">
+        #{chartseries,jdbcType=VARCHAR},
+      </if>
+      <if test="chartcolumn != null">
+        #{chartcolumn,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="commandtype != null">
+        #{commandtype,jdbcType=VARCHAR},
+      </if>
+      <if test="command != null">
+        #{command,jdbcType=VARCHAR},
+      </if>
+      <if test="header != null">
+        #{header,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="chartsort != null">
+        #{chartsort,jdbcType=VARCHAR},
+      </if>
+      <if test="chartminlimit != null">
+        #{chartminlimit,jdbcType=NUMERIC},
+      </if>
+      <if test="chartmaxlimit != null">
+        #{chartmaxlimit,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.report.model.Analyze">
+    update SYS_ANALYZE_INFO
+    <set>
+      <if test="kindid != null">
+        KINDID = #{kindid,jdbcType=NUMERIC},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="charttype != null">
+        CHARTTYPE = #{charttype,jdbcType=VARCHAR},
+      </if>
+      <if test="chartunit != null">
+        CHARTUNIT = #{chartunit,jdbcType=VARCHAR},
+      </if>
+      <if test="chartseries != null">
+        CHARTSERIES = #{chartseries,jdbcType=VARCHAR},
+      </if>
+      <if test="chartcolumn != null">
+        CHARTCOLUMN = #{chartcolumn,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        PATH = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="commandtype != null">
+        COMMANDTYPE = #{commandtype,jdbcType=VARCHAR},
+      </if>
+      <if test="command != null">
+        COMMAND = #{command,jdbcType=VARCHAR},
+      </if>
+      <if test="header != null">
+        HEADER = #{header,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="chartsort != null">
+        CHARTSORT = #{chartsort,jdbcType=VARCHAR},
+      </if>
+      <if test="chartminlimit != null">
+        CHARTMINLIMIT = #{chartminlimit,jdbcType=NUMERIC},
+      </if>
+      <if test="chartmaxlimit != null">
+        CHARTMAXLIMIT = #{chartmaxlimit,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.report.model.Analyze">
+    update SYS_ANALYZE_INFO
+    set KINDID = #{kindid,jdbcType=NUMERIC},
+      TITLE = #{title,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      CHARTTYPE = #{charttype,jdbcType=VARCHAR},
+      CHARTUNIT = #{chartunit,jdbcType=VARCHAR},
+      CHARTSERIES = #{chartseries,jdbcType=VARCHAR},
+      CHARTCOLUMN = #{chartcolumn,jdbcType=VARCHAR},
+      PATH = #{path,jdbcType=VARCHAR},
+      COMMANDTYPE = #{commandtype,jdbcType=VARCHAR},
+      COMMAND = #{command,jdbcType=VARCHAR},
+      HEADER = #{header,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      CHARTSORT = #{chartsort,jdbcType=VARCHAR},
+      CHARTMINLIMIT = #{chartminlimit,jdbcType=NUMERIC},
+      CHARTMAXLIMIT = #{chartmaxlimit,jdbcType=NUMERIC}
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from sys_analyze_info order by id desc
+  </select>
+</mapper>

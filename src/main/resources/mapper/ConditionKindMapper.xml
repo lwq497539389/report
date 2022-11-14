@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.report.dao.ConditionKindMapper">
+  <resultMap id="BaseResultMap" type="com.example.report.model.ConditionKind">
+    <id column="ID" jdbcType="NUMERIC" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, MEMO
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ANALYZE_CONDITIONKIND
+    where ID = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from SYS_ANALYZE_CONDITIONKIND
+    where ID = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.example.report.model.ConditionKind">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      select S_SYS_ANALYZE_CONDITION.NEXTVAL from dual
+    </selectKey>
+    insert into SYS_ANALYZE_CONDITIONKIND (ID, NAME, MEMO
+      )
+    values (#{id,jdbcType=NUMERIC}, #{name,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.report.model.ConditionKind">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      select S_SYS_ANALYZE_CONDITION.NEXTVAL from dual
+    </selectKey>
+    insert into SYS_ANALYZE_CONDITIONKIND
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      ID,
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=NUMERIC},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.report.model.ConditionKind">
+    update SYS_ANALYZE_CONDITIONKIND
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.report.model.ConditionKind">
+    update SYS_ANALYZE_CONDITIONKIND
+    set NAME = #{name,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+</mapper>
